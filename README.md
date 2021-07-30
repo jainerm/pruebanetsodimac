@@ -44,7 +44,7 @@ Paso 2
 Se selecciona "Servicio" opcion "Mantenimiento" y registran los datos para el mantenimiento incicando al mecánico y demás datos 
 por ultimo "Ingresar mantenimiento" y ase añade a la lista.
 
-Paso 3 - En caso de venta de repuestos solamente
+Paso 3 - En caso de venta directa al cliente o de reguerirse repuestos para el mantenimiento 
 ======
 Se selecciona "Repuestos" y se registran los repuestos requeridos por el cliente para la venta o por el Mecácnico para el mantenimiento.
 luego "Ingresar" para registrar el repuesto solicitado.
