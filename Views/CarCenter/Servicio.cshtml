@@ -1,0 +1,91 @@
+﻿@model List<pruebasodimac.Models.CarCenterModels.Matenimiento>
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<div class="container-fluid">
+    <div class="hero row align-items-center">
+        <div class="col-lg-7 col-md-6">
+            <div class="about-img">
+                <h2 class="fa-5x">Mantenimiento</h2>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6">
+            <div class="about-text">
+                <div class="form">
+                    <h2>Datos del servicio</h2>
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-10 col-md-1">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Codigo mecánico">
+                            </div>
+                            <div class="col-lg-2 col-md-1">
+                                <button class="btn btn-default fa-2x mt-2"><i class="far fa-comment-dots"></i></button>
+                            </div>
+                        </div>
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Nombres">
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Apellidos">
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Correo electrónico">
+                        <input class="form-control mt-2 fa-2x" type="number" placeholder="Celular">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-1">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Cliente">
+                            </div>
+                            <div class="col-lg-2 col-md-1">
+                                <button class="btn btn-default fa-2x mt-2"><i class="far fa-comment-dots"></i></button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <select class="custom-select mt-2 fa-2x">
+                                <option selected>Tipo de servicio</option>
+                                <option value="ALIST">Alistamiento</option>
+                                <option value="SINCR">Sincronización</option>
+                                <option value="EMGAS">Emisión de contaminantes</option>
+                                <option value="ELECT">Eléctrico</option>
+                                <option value="MECAN">Mecánico</option>
+                                <option value="LIBRI">Lubricación</option>
+                                <option value="LAPIN">Hojalateria y pintura</option>
+                                <option value="RELLA">Reparación y llantas</option>
+                                <option value="VIDRI">De vidriería</option>
+                                <option value="VESTI">De vestiduras</option>
+                                <option value="MOFLE">De mofles</option>
+                            </select>
+                        </div>
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Correo">
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Dirección">
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Doc. Cliente">
+                        <!-- <textarea class="form-control" placeholder="Comment"></textarea> -->
+                        <button class="btn bg-success fa-2x mt-4">Ingresar matenimiento</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="hero row align-items-center mt-4">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <td class="bg-warning fa-2x">Orden</td>
+                <td class="bg-info fa-2x">Nombres</td>
+                <td class="bg-info fa-2x">Apellidos</td>
+                <td class="bg-info fa-2x">Celular</td>
+                <td class="bg-info fa-2x">Servicio</td>
+                <td class="bg-info fa-2x">Costo</td>
+            </tr>
+            <! --- Detalla de los items cendidos --->
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td class="fa-2x" align="center"><button class="btn btn-default">@oElemento.id_mante</button></td>
+                    <td class="fa-2x">@oElemento.pri_nombre @oElemento.seg_nombre</td>
+                    <td class="fa-2x">@oElemento.pri_apellido @oElemento.seg_apellido</td>
+                    <td class="fa-2x">@oElemento.celular</td>
+                    <td class="fa-2x">@oElemento.desc_servicio</td>
+                    <td class="fa-2x" align="right">@oElemento.vr_repuesto.ToString("C2")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

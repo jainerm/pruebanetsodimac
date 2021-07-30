@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_CENTERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_doc" Type="Int32" />
+    <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="num_doc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="pri_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="seg_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="pri_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="seg_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="documento" Relationship="Self.FK_cliente_documento" FromRole="cliente" ToRole="documento" />
+    <Property Name="id_servicio" Type="Int32" />
+    <Property Name="presupuesto" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="mantenimiento" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="cliente" ToRole="mantenimiento" />
+  </EntityType>
+  <EntityType Name="documento">
+    <Key>
+      <PropertyRef Name="id_doc" />
+    </Key>
+    <Property Name="id_doc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="nom_doc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cliente" Relationship="Self.FK_cliente_documento" FromRole="documento" ToRole="cliente" />
+    <NavigationProperty Name="mecanico" Relationship="Self.FK_mecanico_documento" FromRole="documento" ToRole="mecanico" />
+    <NavigationProperty Name="mecanico1" Relationship="Self.FK_mecanico_documento1" FromRole="documento" ToRole="mecanico" />
+  </EntityType>
+  <EntityType Name="factura">
+    <Key>
+      <PropertyRef Name="id_factura" />
+    </Key>
+    <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_factura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="total_factura" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="descuento" Type="Decimal" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="mecanico">
+    <Key>
+      <PropertyRef Name="id_mecanico" />
+    </Key>
+    <Property Name="id_mecanico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_doc" Type="Int32" />
+    <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="num_doc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="pri_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="seg_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="pri_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="seg_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="documento" Relationship="Self.FK_mecanico_documento" FromRole="mecanico" ToRole="documento" />
+    <NavigationProperty Name="documento1" Relationship="Self.FK_mecanico_documento1" FromRole="mecanico" ToRole="documento" />
+    <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_mecanico" FromRole="mecanico" ToRole="mantenimiento" />
+  </EntityType>
+  <EntityType Name="repuestos">
+    <Key>
+      <PropertyRef Name="id_repuesto" />
+    </Key>
+    <Property Name="id_repuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_repuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="existencia" Type="Int32" />
+    <Property Name="vr_repuesto" Type="Decimal" Precision="15" Scale="2" />
+    <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_repuestos" FromRole="repuestos" ToRole="mantenimiento" />
+  </EntityType>
+  <EntityType Name="servicios">
+    <Key>
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cod_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="desc_servicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="precio_mano" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="descuento" Type="Decimal" Precision="5" Scale="3" />
+    <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_servicios" FromRole="servicios" ToRole="mantenimiento" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="mantenimiento">
+    <Key>
+      <PropertyRef Name="id_manten" />
+      <PropertyRef Name="id_repuesto" />
+      <PropertyRef Name="id_mecanico" />
+      <PropertyRef Name="id_servicio" />
+    </Key>
+    <Property Name="id_manten" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_unidades" Type="Int32" />
+    <Property Name="precio_unidad" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="descuento" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="id_repuesto" Type="Int32" Nullable="false" />
+    <Property Name="id_mecanico" Type="Int32" Nullable="false" />
+    <Property Name="id_servicio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="mecanico" Relationship="Self.FK_mantenimiento_mecanico" FromRole="mantenimiento" ToRole="mecanico" />
+    <NavigationProperty Name="repuestos" Relationship="Self.FK_mantenimiento_repuestos" FromRole="mantenimiento" ToRole="repuestos" />
+    <NavigationProperty Name="servicios" Relationship="Self.FK_mantenimiento_servicios" FromRole="mantenimiento" ToRole="servicios" />
+    <Property Name="id_cliente" Type="Int32" />
+    <NavigationProperty Name="cliente" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="mantenimiento" ToRole="cliente" />
+  </EntityType>
+  <Association Name="FK_cliente_documento">
+    <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+    <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="documento">
+        <PropertyRef Name="id_doc" />
+      </Principal>
+      <Dependent Role="cliente">
+        <PropertyRef Name="id_doc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mecanico_documento">
+    <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+    <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="documento">
+        <PropertyRef Name="id_doc" />
+      </Principal>
+      <Dependent Role="mecanico">
+        <PropertyRef Name="id_doc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mecanico_documento1">
+    <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+    <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="documento">
+        <PropertyRef Name="id_doc" />
+      </Principal>
+      <Dependent Role="mecanico">
+        <PropertyRef Name="id_doc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mantenimiento_mecanico">
+    <End Role="mecanico" Type="Self.mecanico" Multiplicity="1" />
+    <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mecanico">
+        <PropertyRef Name="id_mecanico" />
+      </Principal>
+      <Dependent Role="mantenimiento">
+        <PropertyRef Name="id_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mantenimiento_repuestos">
+    <End Role="repuestos" Type="Self.repuestos" Multiplicity="1" />
+    <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="repuestos">
+        <PropertyRef Name="id_repuesto" />
+      </Principal>
+      <Dependent Role="mantenimiento">
+        <PropertyRef Name="id_repuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mantenimiento_servicios">
+    <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+    <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="servicios">
+        <PropertyRef Name="id_servicio" />
+      </Principal>
+      <Dependent Role="mantenimiento">
+        <PropertyRef Name="id_servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CAR_CENTEREntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="documento" EntityType="Self.documento" />
+    <EntitySet Name="factura" EntityType="Self.factura" />
+    <EntitySet Name="mecanico" EntityType="Self.mecanico" />
+    <EntitySet Name="repuestos" EntityType="Self.repuestos" />
+    <EntitySet Name="servicios" EntityType="Self.servicios" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="mantenimiento" EntityType="Self.mantenimiento" />
+    <AssociationSet Name="FK_cliente_documento" Association="Self.FK_cliente_documento">
+      <End Role="documento" EntitySet="documento" />
+      <End Role="cliente" EntitySet="cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mecanico_documento" Association="Self.FK_mecanico_documento">
+      <End Role="documento" EntitySet="documento" />
+      <End Role="mecanico" EntitySet="mecanico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mecanico_documento1" Association="Self.FK_mecanico_documento1">
+      <End Role="documento" EntitySet="documento" />
+      <End Role="mecanico" EntitySet="mecanico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mantenimiento_mecanico" Association="Self.FK_mantenimiento_mecanico">
+      <End Role="mecanico" EntitySet="mecanico" />
+      <End Role="mantenimiento" EntitySet="mantenimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mantenimiento_repuestos" Association="Self.FK_mantenimiento_repuestos">
+      <End Role="repuestos" EntitySet="repuestos" />
+      <End Role="mantenimiento" EntitySet="mantenimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mantenimiento_servicios" Association="Self.FK_mantenimiento_servicios">
+      <End Role="servicios" EntitySet="servicios" />
+      <End Role="mantenimiento" EntitySet="mantenimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mantenimiento_cliente" Association="CAR_CENTERModel.FK_mantenimiento_cliente">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="mantenimiento" EntitySet="mantenimiento" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_mantenimiento_cliente">
+    <End Type="CAR_CENTERModel.cliente" Role="cliente" Multiplicity="0..1" />
+    <End Type="CAR_CENTERModel.mantenimiento" Role="mantenimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="mantenimiento">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

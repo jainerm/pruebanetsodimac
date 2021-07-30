@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.logueado = "SIn ingresar";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sodimac - ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- Header Start -->
+    <div class="header home">
+        <div class="container-fluid">
+            <div class="header-top row align-items-center">
+                <div class="col-lg-5">
+                    <div class="brand">
+                        <a href="index.html">
+                            <h1>Car-Center</h1>
+                            <!-- <img src="../img/portfolio-1.jpg" alt="Logo"> -->
+                        </a>
+                    </div>
+                    <div class="navbar navbar-expand-lg bg-light navbar-light">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav nav-item nav-link">
+                                <li class="fa-2x nav-item ">@Html.ActionLink("Inicio", "Index", "CarCenter")</li>
+                                <li class="fa-2x nav-item ">@Html.ActionLink("Cliente", "Cliente", "CarCenter")</li>
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="fa-2x nav-item dropdown-toggle" data-toggle="dropdown">Servicio</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="fa-2x dropdown-item">@Html.ActionLink("Matenimiento", "Servicio", "CarCenter")</li>
+                                        <li class="fa-2x dropdown-item">@Html.ActionLink("Repuestos", "Repuestos", "CarCenter")</li>
+                                    </ul>
+                                </li>
+                                <li class="fa-2x nav-item ">@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                                <li class="fa-2x nav-item ">@Html.ActionLink("Acerca de", "About", "Home")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="topbar">
+                        <div class="topbar-col">
+                            <a href="tel:+012 345 67890"><i class="fa fa-phone-alt"></i>+324 400 62 04</a>
+                        </div>
+                        <div class="topbar-col">
+                            <a href="mailto:jainerm6705@gmail.com"><i class="fa fa-envelope"></i>jainerm6705@gmail.com</a>
+                        </div>
+                        <div class="topbar-col">
+                            <div class="topbar-social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="topbar-col">
+                            <a href="#"><i class="fa fa-person"></i>@ViewBag.logueado</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Prueba Sodimac ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

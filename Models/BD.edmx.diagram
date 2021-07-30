@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c77869dc7484eaa9cb234f620e6a87a" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="CAR_CENTERModel.cliente" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.documento" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.factura" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.mecanico" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.repuestos" Width="1.5" PointX="0.625" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.servicios" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_CENTERModel.mantenimiento" Width="1.5" PointX="5.375" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_cliente_documento" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mecanico_documento" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mecanico_documento1" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mantenimiento_mecanico" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mantenimiento_repuestos" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mantenimiento_servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="CAR_CENTERModel.FK_mantenimiento_cliente" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

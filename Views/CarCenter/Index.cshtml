@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home";
+    ViewBag.IngresoUsr = "Sin ingresar";
+}
+
+<div class="container-fluid">
+    <div class="hero row align-items-center">
+        <div class="col-lg-7 col-md-6">
+            <div class="about-img">
+                <h2 class="fa-5x">Ingresar</h2>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6">
+            <div class="about-text">
+                <div class="form">
+                    <h2>Datos de ingreso</h2>
+                    <form>
+                        <input class="form-control mt-4 fa-2x" type="text" placeholder="Usuario o correo" value="">
+                        <input class="form-control mt-4 fa-2x" type="password" placeholder="Contraseña" value="">
+                        <a href="#" class="nav-item nav-link fa-2x text-right text-primary">Registrarse</a>
+                        <button class="btn btn-block bg-success fa-2x mt-4">@Html.ActionLink("Ingresar", "Ingresar", "CarCenter")</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

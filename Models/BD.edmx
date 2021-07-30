@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CAR_CENTERModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_doc" Type="int" />
+          <Property Name="tipo_doc" Type="varchar" MaxLength="3" />
+          <Property Name="num_doc" Type="varchar" MaxLength="15" />
+          <Property Name="pri_nombre" Type="varchar" MaxLength="25" />
+          <Property Name="seg_nombre" Type="varchar" MaxLength="25" />
+          <Property Name="pri_apellido" Type="varchar" MaxLength="25" />
+          <Property Name="seg_apellido" Type="varchar" MaxLength="25" />
+          <Property Name="correo" Type="varchar" MaxLength="100" />
+          <Property Name="celular" Type="varchar" MaxLength="15" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="id_servicio" Type="int" />
+          <Property Name="presupuesto" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="id_doc" />
+          </Key>
+          <Property Name="id_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_doc" Type="varchar" MaxLength="3" />
+          <Property Name="nom_doc" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_factura" Type="varchar" MaxLength="10" />
+          <Property Name="total_factura" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="descuento" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="mantenimiento">
+          <Key>
+            <PropertyRef Name="id_manten" />
+            <PropertyRef Name="id_repuesto" />
+            <PropertyRef Name="id_mecanico" />
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_manten" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_unidades" Type="int" />
+          <Property Name="precio_unidad" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="descuento" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="id_repuesto" Type="int" Nullable="false" />
+          <Property Name="id_mecanico" Type="int" Nullable="false" />
+          <Property Name="id_servicio" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" />
+        </EntityType>
+        <EntityType Name="mecanico">
+          <Key>
+            <PropertyRef Name="id_mecanico" />
+          </Key>
+          <Property Name="id_mecanico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_doc" Type="int" />
+          <Property Name="tipo_doc" Type="varchar" MaxLength="3" />
+          <Property Name="num_doc" Type="varchar" MaxLength="15" />
+          <Property Name="celular" Type="varchar" MaxLength="15" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="correo" Type="varchar" MaxLength="100" />
+          <Property Name="pri_nombre" Type="varchar" MaxLength="25" />
+          <Property Name="seg_nombre" Type="varchar" MaxLength="25" />
+          <Property Name="pri_apellido" Type="varchar" MaxLength="25" />
+          <Property Name="seg_apellido" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="repuestos">
+          <Key>
+            <PropertyRef Name="id_repuesto" />
+          </Key>
+          <Property Name="id_repuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_repuesto" Type="varchar" MaxLength="60" />
+          <Property Name="existencia" Type="int" />
+          <Property Name="vr_repuesto" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="servicios">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_servicio" Type="varchar" MaxLength="10" />
+          <Property Name="desc_servicio" Type="varchar" MaxLength="100" />
+          <Property Name="precio_mano" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="descuento" Type="decimal" Precision="5" Scale="3" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_cliente_documento">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="cliente">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_cliente">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_mecanico">
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mecanico">
+              <PropertyRef Name="id_mecanico" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_repuestos">
+          <End Role="repuestos" Type="Self.repuestos" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repuestos">
+              <PropertyRef Name="id_repuesto" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_repuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_servicios">
+          <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mecanico_documento">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="mecanico">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mecanico_documento1">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="mecanico">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CAR_CENTERModelStoreContainer">
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="documento" EntityType="Self.documento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="factura" EntityType="Self.factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mecanico" EntityType="Self.mecanico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repuestos" EntityType="Self.repuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servicios" EntityType="Self.servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mantenimiento" EntityType="Self.mantenimiento" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mantenimiento].[id_manten] AS [id_manten], 
+    [mantenimiento].[num_unidades] AS [num_unidades], 
+    [mantenimiento].[precio_unidad] AS [precio_unidad], 
+    [mantenimiento].[descuento] AS [descuento], 
+    [mantenimiento].[id_repuesto] AS [id_repuesto], 
+    [mantenimiento].[id_mecanico] AS [id_mecanico], 
+    [mantenimiento].[id_servicio] AS [id_servicio], 
+    [mantenimiento].[id_cliente] AS [id_cliente]
+    FROM [dbo].[mantenimiento] AS [mantenimiento]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_cliente_documento" Association="Self.FK_cliente_documento">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="cliente" EntitySet="cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_cliente" Association="Self.FK_mantenimiento_cliente">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_mecanico" Association="Self.FK_mantenimiento_mecanico">
+            <End Role="mecanico" EntitySet="mecanico" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_repuestos" Association="Self.FK_mantenimiento_repuestos">
+            <End Role="repuestos" EntitySet="repuestos" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_servicios" Association="Self.FK_mantenimiento_servicios">
+            <End Role="servicios" EntitySet="servicios" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mecanico_documento" Association="Self.FK_mecanico_documento">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="mecanico" EntitySet="mecanico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mecanico_documento1" Association="Self.FK_mecanico_documento1">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="mecanico" EntitySet="mecanico" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CAR_CENTERModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_doc" Type="Int32" />
+          <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="num_doc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="pri_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="seg_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pri_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="seg_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="documento" Relationship="Self.FK_cliente_documento" FromRole="cliente" ToRole="documento" />
+          <Property Name="id_servicio" Type="Int32" />
+          <Property Name="presupuesto" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="mantenimiento" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="cliente" ToRole="mantenimiento" />
+        </EntityType>
+        <EntityType Name="documento">
+          <Key>
+            <PropertyRef Name="id_doc" />
+          </Key>
+          <Property Name="id_doc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="nom_doc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK_cliente_documento" FromRole="documento" ToRole="cliente" />
+          <NavigationProperty Name="mecanico" Relationship="Self.FK_mecanico_documento" FromRole="documento" ToRole="mecanico" />
+          <NavigationProperty Name="mecanico1" Relationship="Self.FK_mecanico_documento1" FromRole="documento" ToRole="mecanico" />
+        </EntityType>
+        <EntityType Name="factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_factura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="total_factura" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="descuento" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="mecanico">
+          <Key>
+            <PropertyRef Name="id_mecanico" />
+          </Key>
+          <Property Name="id_mecanico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_doc" Type="Int32" />
+          <Property Name="tipo_doc" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="num_doc" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pri_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="seg_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pri_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="seg_apellido" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="documento" Relationship="Self.FK_mecanico_documento" FromRole="mecanico" ToRole="documento" />
+          <NavigationProperty Name="documento1" Relationship="Self.FK_mecanico_documento1" FromRole="mecanico" ToRole="documento" />
+          <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_mecanico" FromRole="mecanico" ToRole="mantenimiento" />
+        </EntityType>
+        <EntityType Name="repuestos">
+          <Key>
+            <PropertyRef Name="id_repuesto" />
+          </Key>
+          <Property Name="id_repuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_repuesto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="existencia" Type="Int32" />
+          <Property Name="vr_repuesto" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_repuestos" FromRole="repuestos" ToRole="mantenimiento" />
+        </EntityType>
+        <EntityType Name="servicios">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_servicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="desc_servicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precio_mano" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="descuento" Type="Decimal" Precision="5" Scale="3" />
+          <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_servicios" FromRole="servicios" ToRole="mantenimiento" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="mantenimiento">
+          <Key>
+            <PropertyRef Name="id_manten" />
+            <PropertyRef Name="id_repuesto" />
+            <PropertyRef Name="id_mecanico" />
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_manten" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_unidades" Type="Int32" />
+          <Property Name="precio_unidad" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="descuento" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="id_repuesto" Type="Int32" Nullable="false" />
+          <Property Name="id_mecanico" Type="Int32" Nullable="false" />
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mecanico" Relationship="Self.FK_mantenimiento_mecanico" FromRole="mantenimiento" ToRole="mecanico" />
+          <NavigationProperty Name="repuestos" Relationship="Self.FK_mantenimiento_repuestos" FromRole="mantenimiento" ToRole="repuestos" />
+          <NavigationProperty Name="servicios" Relationship="Self.FK_mantenimiento_servicios" FromRole="mantenimiento" ToRole="servicios" />
+          <Property Name="id_cliente" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="mantenimiento" ToRole="cliente" />
+        </EntityType>
+        <Association Name="FK_cliente_documento">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="cliente">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mecanico_documento">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="mecanico">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mecanico_documento1">
+          <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documento">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="mecanico">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_mecanico">
+          <End Role="mecanico" Type="Self.mecanico" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mecanico">
+              <PropertyRef Name="id_mecanico" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_repuestos">
+          <End Role="repuestos" Type="Self.repuestos" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repuestos">
+              <PropertyRef Name="id_repuesto" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_repuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_servicios">
+          <End Role="servicios" Type="Self.servicios" Multiplicity="1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicios">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CAR_CENTEREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="documento" EntityType="Self.documento" />
+          <EntitySet Name="factura" EntityType="Self.factura" />
+          <EntitySet Name="mecanico" EntityType="Self.mecanico" />
+          <EntitySet Name="repuestos" EntityType="Self.repuestos" />
+          <EntitySet Name="servicios" EntityType="Self.servicios" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="mantenimiento" EntityType="Self.mantenimiento" />
+          <AssociationSet Name="FK_cliente_documento" Association="Self.FK_cliente_documento">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="cliente" EntitySet="cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mecanico_documento" Association="Self.FK_mecanico_documento">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="mecanico" EntitySet="mecanico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mecanico_documento1" Association="Self.FK_mecanico_documento1">
+            <End Role="documento" EntitySet="documento" />
+            <End Role="mecanico" EntitySet="mecanico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_mecanico" Association="Self.FK_mantenimiento_mecanico">
+            <End Role="mecanico" EntitySet="mecanico" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_repuestos" Association="Self.FK_mantenimiento_repuestos">
+            <End Role="repuestos" EntitySet="repuestos" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_servicios" Association="Self.FK_mantenimiento_servicios">
+            <End Role="servicios" EntitySet="servicios" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_cliente" Association="CAR_CENTERModel.FK_mantenimiento_cliente">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_mantenimiento_cliente">
+          <End Type="CAR_CENTERModel.cliente" Role="cliente" Multiplicity="0..1" />
+          <End Type="CAR_CENTERModel.mantenimiento" Role="mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CAR_CENTERModelStoreContainer" CdmEntityContainer="CAR_CENTEREntities">
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="presupuesto" ColumnName="presupuesto" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="tipo_doc" ColumnName="tipo_doc" />
+                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
+                <ScalarProperty Name="pri_nombre" ColumnName="pri_nombre" />
+                <ScalarProperty Name="seg_nombre" ColumnName="seg_nombre" />
+                <ScalarProperty Name="pri_apellido" ColumnName="pri_apellido" />
+                <ScalarProperty Name="seg_apellido" ColumnName="seg_apellido" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documento">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.documento">
+              <MappingFragment StoreEntitySet="documento">
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="tipo_doc" ColumnName="tipo_doc" />
+                <ScalarProperty Name="nom_doc" ColumnName="nom_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="factura">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.factura">
+              <MappingFragment StoreEntitySet="factura">
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="total_factura" ColumnName="total_factura" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mecanico">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.mecanico">
+              <MappingFragment StoreEntitySet="mecanico">
+                <ScalarProperty Name="id_mecanico" ColumnName="id_mecanico" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="tipo_doc" ColumnName="tipo_doc" />
+                <ScalarProperty Name="num_doc" ColumnName="num_doc" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="pri_nombre" ColumnName="pri_nombre" />
+                <ScalarProperty Name="seg_nombre" ColumnName="seg_nombre" />
+                <ScalarProperty Name="pri_apellido" ColumnName="pri_apellido" />
+                <ScalarProperty Name="seg_apellido" ColumnName="seg_apellido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="repuestos">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.repuestos">
+              <MappingFragment StoreEntitySet="repuestos">
+                <ScalarProperty Name="id_repuesto" ColumnName="id_repuesto" />
+                <ScalarProperty Name="nom_repuesto" ColumnName="nom_repuesto" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="vr_repuesto" ColumnName="vr_repuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicios">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.servicios">
+              <MappingFragment StoreEntitySet="servicios">
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="cod_servicio" ColumnName="cod_servicio" />
+                <ScalarProperty Name="desc_servicio" ColumnName="desc_servicio" />
+                <ScalarProperty Name="precio_mano" ColumnName="precio_mano" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mantenimiento">
+            <EntityTypeMapping TypeName="CAR_CENTERModel.mantenimiento">
+              <MappingFragment StoreEntitySet="mantenimiento">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_manten" ColumnName="id_manten" />
+                <ScalarProperty Name="num_unidades" ColumnName="num_unidades" />
+                <ScalarProperty Name="precio_unidad" ColumnName="precio_unidad" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="id_repuesto" ColumnName="id_repuesto" />
+                <ScalarProperty Name="id_mecanico" ColumnName="id_mecanico" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

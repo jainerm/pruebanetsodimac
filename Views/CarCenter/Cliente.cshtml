@@ -1,0 +1,96 @@
+﻿@model List<pruebasodimac.Models.CarCenterModels.Clientes>
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<div class="container-fluid">
+    <div class="hero row align-items-center">
+        <div class="col-lg-5 col-md-6">
+            <div class="about-img">
+                <h2 class="fa-5x">Cliente</h2>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <div class="about-text">
+                <div class="form">
+                    <h2>Datos de cliente</h2>
+                    <form>
+                        <div class="hero row align-items-center">
+                            <div class="col-lg-6 col-md-6">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Primer nombres">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Primer apellido">
+                                <div class="control-group">
+                                    <select class="custom-select mt-2 fa-2x">
+                                        <option selected>Tipo de documento</option>
+                                        <option value="CC">C.C - Cédula de ciudadania</option>
+                                        <option value="CE">C.E - Cédula de extranjería</option>
+                                        <option value="TI">T.I - Tarjeta de identidad</option>
+                                        <option value="PAS">PAS - Pasaporte</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Segunda nombres">
+                                <input class="form-control mt-2 fa-2x" type="text" placeholder="Segunda apellido">
+                                <input class="form-control mt-2 fa-2x lb-number" type="number" maxlength="12" placeholder="Nro. Documento">
+                                <!-- <textarea class="form-control" placeholder="Comment"></textarea> -->
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="control-group">
+                                    <select class="custom-select mt-2 fa-2x">
+                                        <option selected>Tipo de servicio</option>
+                                        <option value="ALIST">Alistamiento</option>
+                                        <option value="EMGAS">Emisión de contaminantes</option>
+                                        <option value="ELECT">Eléctrico</option>
+                                        <option value="MECAN">Mecánico</option>
+                                        <option value="LIBRI">Lubricación</option>
+                                        <option value="LAPIN">Hojalateria y pintura</option>
+                                        <option value="RELLA">Reparación y llantas</option>
+                                        <option value="VIDRI">De vidriería</option>
+                                        <option value="VESTI">De vestiduras</option>
+                                        <option value="MOFLE">De mofles</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <input class="form-control mt-2 fa-2x" type="number" id="presupuesto" placeholder="Presupuesto">
+                            </div>
+                        </div>
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Correo">
+                        <input class="form-control mt-2 fa-2x" type="number" placeholder="Celular">
+                        <input class="form-control mt-2 fa-2x" type="text" placeholder="Dirección">
+                        <button class="btn bg-success fa-2x mt-4">Ingresar cliente</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+</div>
+<div class="hero row align-items-center mt-4">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <td class="bg-warning fa-2x">Documento</td>
+                <td class="bg-info fa-2x">Nombres</td>
+                <td class="bg-info fa-2x">Apellidos</td>
+                <td class="bg-info fa-2x">Celular</td>
+                <td class="bg-info fa-2x">Servicio</td>
+                <td class="bg-info fa-2x">Presupuesto</td>
+            </tr>
+            <! --- Detalla de los items cendidos --->
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td class="fa-2x" align="center"><button class="btn btn-default">@oElemento.tipo_doc @oElemento.num_doc </button></td>
+                    <td class="fa-2x">@oElemento.pri_nombre @oElemento.seg_nombre</td>
+                    <td class="fa-2x">@oElemento.pri_apellido @oElemento.seg_apellido</td>
+                    <td class="fa-2x">@oElemento.celular</td>
+                    <td class="fa-2x">@oElemento.servicio</td>
+                    <td class="fa-2x" align="right">@oElemento.presupuesto.ToString("C2")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
