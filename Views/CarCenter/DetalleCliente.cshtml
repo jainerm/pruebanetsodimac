@@ -1,0 +1,33 @@
+﻿@model List<pruebasodimac.Models.CarCenterModels.Clientes>
+
+@{
+    ViewBag.Title = "DetalleCliente";
+}
+
+<div class="hero row align-items-center mt-4">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <td class="bg-warning fa-2x">Documento</td>
+                <td class="bg-info fa-2x">Nombres</td>
+                <td class="bg-info fa-2x">Apellidos</td>
+                <td class="bg-info fa-2x">Celular</td>
+                <td class="bg-info fa-2x">Servicio</td>
+                <td class="bg-info fa-2x">Presupuesto</td>
+            </tr>
+            <! --- Detalla de los items cendidos --->
+
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td class="fa-2x" align="center"><button class="btn btn-default">@oElemento.tipo_doc @oElemento.num_doc </button></td>
+                    <td class="fa-2x">@oElemento.pri_nombre @oElemento.seg_nombre</td>
+                    <td class="fa-2x">@oElemento.pri_apellido @oElemento.seg_apellido</td>
+                    <td class="fa-2x">@oElemento.celular</td>
+                    <td class="fa-2x">@oElemento.servicio</td>
+                    <td class="fa-2x" align="right">@oElemento.presupuesto.ToString("C2")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
