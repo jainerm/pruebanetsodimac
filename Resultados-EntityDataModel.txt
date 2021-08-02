@@ -1,0 +1,6 @@
+﻿El modelo se generó con advertencias o errores.BD.edmxVea la lista de errores para obtener más detalles. Se deben corregir estos problemas antes de ejecutar la aplicación.
+La carga de los metadatos desde la base de datos tardó 00:00:00.8664259.
+La generación del modelo tardó 00:00:01.7960180.
+El modelo se generó con advertencias o errores.BD.edmxVea la lista de errores para obtener más detalles. Se deben corregir estos problemas antes de ejecutar la aplicación.
+La carga de los metadatos desde la base de datos tardó 00:00:00.7217104.
+La generación del modelo tardó 00:00:01.3973065.

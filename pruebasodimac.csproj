@@ -133,48 +133,56 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BD.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BD.Context.tt</DependentUpon>
+    <Compile Include="Models\CarCenterModels\Clientes.cs" />
+    <Compile Include="Models\CarCenterModels\Documentos.cs" />
+    <Compile Include="Models\CarCenterModels\Matenimiento.cs" />
+    <Compile Include="Models\CarCenterModels\Procedimientos\spInsertarCliente.cs" />
+    <Compile Include="Models\CarCenterModels\Repuestos.cs" />
+    <Compile Include="Models\CarCenterModels\Servicios.cs" />
+    <Compile Include="Models\cliente.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BD.cs">
+    <Compile Include="Models\documento.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\factura.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mantenimiento.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mecanico.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BD.tt</DependentUpon>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BD.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarCenterModels\Clientes.cs" />
-    <Compile Include="Models\CarCenterModels\Matenimiento.cs" />
-    <Compile Include="Models\CarCenterModels\Repuestos.cs" />
-    <Compile Include="Models\CarCenterModels\Servicios.cs" />
-    <Compile Include="Models\cliente.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\documento.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\factura.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\mantenimiento.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\mecanico.cs">
-      <DependentUpon>BD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\repuestos.cs">
-      <DependentUpon>BD.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\servicios.cs">
-      <DependentUpon>BD.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>BD.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -210,18 +218,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BD.Context.tt">
+    <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BD.Context.cs</LastGenOutput>
       <DependentUpon>BD.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BD.tt">
+    <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BD.edmx</DependentUpon>
-      <LastGenOutput>BD.cs</LastGenOutput>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\lib\owlcarousel\LICENSE" />
     <EntityDeploy Include="Models\BD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BD.Designer.cs</LastGenOutput>
@@ -229,7 +238,6 @@
     <Content Include="Models\BD.edmx.diagram">
       <DependentUpon>BD.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\lib\owlcarousel\LICENSE" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -259,6 +267,7 @@
     <Content Include="Views\CarCenter\Cliente.cshtml" />
     <Content Include="Views\CarCenter\Servicio.cshtml" />
     <Content Include="Views\CarCenter\Repuestos.cshtml" />
+    <Content Include="Views\CarCenter\DetalleCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
