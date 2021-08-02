@@ -38,7 +38,13 @@ Ir a la carpeta y cargar la solucion "pruebasodumac.sln"
 
 Verificar cuando se cargue todo el proyecto el esquema de la BD, en la sección "Model" BD.edmx
 
-Ejectuar la aplicación.
+
+NOTAS ADICIONALES
+=================
+
+La aplicación tiene una combinación entre el uso de Entity Frameworks en la parte de consulta con el lenguaje LQ de consultas  
+para c# y el uso de procedimientos almacenados para Inseartar, Actualizar y Eliminar.
+
 
 Tenga en cuenta:
 ================
