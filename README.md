@@ -17,6 +17,14 @@ aqui se puede verificar la ENTIDAD RELACION de las tablas y su definicion.
 
 SOBRE LA APLICACION
 ===================
+
+Pantalla de Menu mantenimiento
+==============================
+![image](https://user-images.githubusercontent.com/45112986/127864202-95e809b8-85c4-4b52-b7c7-24f4f7954d40.png)
+
+Pantalla de Registro de Clientes
+================================
+
 ![image](https://user-images.githubusercontent.com/45112986/127864008-c9ee80d2-e6e9-467b-8918-0804c140df32.png)
 
 Al CLONAR la aplicación se debe asegurar estar el Entity Framework Ver. 6.
