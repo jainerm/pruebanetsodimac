@@ -17,6 +17,8 @@ aqui se puede verificar la ENTIDAD RELACION de las tablas y su definicion.
 
 SOBRE LA APLICACION
 ===================
+![image](https://user-images.githubusercontent.com/45112986/127864008-c9ee80d2-e6e9-467b-8918-0804c140df32.png)
+
 Al CLONAR la aplicación se debe asegurar estar el Entity Framework Ver. 6.
 
 Ir a la carpeta y cargar la solucion "pruebasodumac.sln"
