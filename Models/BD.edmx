@@ -187,6 +187,69 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spActulizarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_doc" Type="int" Mode="In" />
+          <Parameter Name="tipo_doc" Type="int" Mode="In" />
+          <Parameter Name="num_doc" Type="varchar" Mode="In" />
+          <Parameter Name="pri_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="seg_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pri_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="seg_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="celular" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="id_servicio" Type="int" Mode="In" />
+          <Parameter Name="presupuesto" Type="decimal" Mode="In" />
+          <Parameter Name="cMensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spBorrarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="num_doc" Type="varchar" Mode="In" />
+          <Parameter Name="cMensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spInsertarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_doc" Type="varchar" Mode="In" />
+          <Parameter Name="num_doc" Type="varchar" Mode="In" />
+          <Parameter Name="pri_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="seg_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pri_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="seg_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="celular" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="cod_servicio" Type="varchar" Mode="In" />
+          <Parameter Name="presupuesto" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="CAR_CENTERModelStoreContainer">
           <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="documento" EntityType="Self.documento" Schema="dbo" store:Type="Tables" />
@@ -255,10 +318,10 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
           <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="documento" Relationship="Self.FK_cliente_documento" FromRole="cliente" ToRole="documento" />
           <Property Name="id_servicio" Type="Int32" />
           <Property Name="presupuesto" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="mantenimiento" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="cliente" ToRole="mantenimiento" />
+          <NavigationProperty Name="documento" Relationship="Self.FK_cliente_documento" FromRole="cliente" ToRole="documento" />
+          <NavigationProperty Name="mantenimiento" Relationship="Self.FK_mantenimiento_cliente" FromRole="cliente" ToRole="mantenimiento" />
         </EntityType>
         <EntityType Name="documento">
           <Key>
@@ -344,11 +407,11 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
           <Property Name="id_repuesto" Type="Int32" Nullable="false" />
           <Property Name="id_mecanico" Type="Int32" Nullable="false" />
           <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK_mantenimiento_cliente" FromRole="mantenimiento" ToRole="cliente" />
           <NavigationProperty Name="mecanico" Relationship="Self.FK_mantenimiento_mecanico" FromRole="mantenimiento" ToRole="mecanico" />
           <NavigationProperty Name="repuestos" Relationship="Self.FK_mantenimiento_repuestos" FromRole="mantenimiento" ToRole="repuestos" />
           <NavigationProperty Name="servicios" Relationship="Self.FK_mantenimiento_servicios" FromRole="mantenimiento" ToRole="servicios" />
-          <Property Name="id_cliente" Type="Int32" />
-          <NavigationProperty Name="cliente" Relationship="CAR_CENTERModel.FK_mantenimiento_cliente" FromRole="mantenimiento" ToRole="cliente" />
         </EntityType>
         <Association Name="FK_cliente_documento">
           <End Role="documento" Type="Self.documento" Multiplicity="0..1" />
@@ -359,6 +422,18 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
             </Principal>
             <Dependent Role="cliente">
               <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mantenimiento_cliente">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="mantenimiento" Type="Self.mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="mantenimiento">
+              <PropertyRef Name="id_cliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -422,7 +497,7 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CAR_CENTEREntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CAR_CENTEREntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cliente" EntityType="Self.cliente" />
           <EntitySet Name="documento" EntityType="Self.documento" />
           <EntitySet Name="factura" EntityType="Self.factura" />
@@ -434,6 +509,10 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
           <AssociationSet Name="FK_cliente_documento" Association="Self.FK_cliente_documento">
             <End Role="documento" EntitySet="documento" />
             <End Role="cliente" EntitySet="cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mantenimiento_cliente" Association="Self.FK_mantenimiento_cliente">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="mantenimiento" EntitySet="mantenimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_mecanico_documento" Association="Self.FK_mecanico_documento">
             <End Role="documento" EntitySet="documento" />
@@ -455,34 +534,89 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
             <End Role="servicios" EntitySet="servicios" />
             <End Role="mantenimiento" EntitySet="mantenimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK_mantenimiento_cliente" Association="CAR_CENTERModel.FK_mantenimiento_cliente">
-            <End Role="cliente" EntitySet="cliente" />
-            <End Role="mantenimiento" EntitySet="mantenimiento" />
-          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CAR_CENTERModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CAR_CENTERModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="spActulizarCliente">
+            <Parameter Name="id_doc" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_doc" Mode="In" Type="Int32" />
+            <Parameter Name="num_doc" Mode="In" Type="String" />
+            <Parameter Name="pri_nombre" Mode="In" Type="String" />
+            <Parameter Name="seg_nombre" Mode="In" Type="String" />
+            <Parameter Name="pri_apellido" Mode="In" Type="String" />
+            <Parameter Name="seg_apellido" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="celular" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="id_servicio" Mode="In" Type="Int32" />
+            <Parameter Name="presupuesto" Mode="In" Type="Decimal" />
+            <Parameter Name="cMensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spBorrarCliente">
+            <Parameter Name="num_doc" Mode="In" Type="String" />
+            <Parameter Name="cMensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarCliente">
+            <Parameter Name="tipo_doc" Mode="In" Type="String" />
+            <Parameter Name="num_doc" Mode="In" Type="String" />
+            <Parameter Name="pri_nombre" Mode="In" Type="String" />
+            <Parameter Name="seg_nombre" Mode="In" Type="String" />
+            <Parameter Name="pri_apellido" Mode="In" Type="String" />
+            <Parameter Name="seg_apellido" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="celular" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="cod_servicio" Mode="In" Type="String" />
+            <Parameter Name="presupuesto" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
-        <Association Name="FK_mantenimiento_cliente">
-          <End Type="CAR_CENTERModel.cliente" Role="cliente" Multiplicity="0..1" />
-          <End Type="CAR_CENTERModel.mantenimiento" Role="mantenimiento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cliente">
-              <PropertyRef Name="id_cliente" />
-            </Principal>
-            <Dependent Role="mantenimiento">
-              <PropertyRef Name="id_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CAR_CENTERModelStoreContainer" CdmEntityContainer="CAR_CENTEREntities">
+        <EntityContainerMapping StorageEntityContainer="CAR_CENTERModelStoreContainer" CdmEntityContainer="CAR_CENTEREntities1">
           <EntitySetMapping Name="cliente">
             <EntityTypeMapping TypeName="CAR_CENTERModel.cliente">
               <MappingFragment StoreEntitySet="cliente">
-                <ScalarProperty Name="presupuesto" ColumnName="presupuesto" />
-                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
                 <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="id_doc" ColumnName="id_doc" />
                 <ScalarProperty Name="tipo_doc" ColumnName="tipo_doc" />
@@ -494,6 +628,8 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="celular" ColumnName="celular" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="presupuesto" ColumnName="presupuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -568,7 +704,6 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
           <EntitySetMapping Name="mantenimiento">
             <EntityTypeMapping TypeName="CAR_CENTERModel.mantenimiento">
               <MappingFragment StoreEntitySet="mantenimiento">
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
                 <ScalarProperty Name="id_manten" ColumnName="id_manten" />
                 <ScalarProperty Name="num_unidades" ColumnName="num_unidades" />
                 <ScalarProperty Name="precio_unidad" ColumnName="precio_unidad" />
@@ -576,9 +711,37 @@ advertencia 6002: La tabla o vista 'CAR_CENTER.dbo.mantenimiento' no tiene defin
                 <ScalarProperty Name="id_repuesto" ColumnName="id_repuesto" />
                 <ScalarProperty Name="id_mecanico" ColumnName="id_mecanico" />
                 <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CAR_CENTERModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CAR_CENTERModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CAR_CENTERModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CAR_CENTERModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CAR_CENTERModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CAR_CENTERModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CAR_CENTERModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CAR_CENTERModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CAR_CENTERModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spActulizarCliente" FunctionName="CAR_CENTERModel.Store.spActulizarCliente" />
+          <FunctionImportMapping FunctionImportName="spBorrarCliente" FunctionName="CAR_CENTERModel.Store.spBorrarCliente" />
+          <FunctionImportMapping FunctionImportName="spInsertarCliente" FunctionName="CAR_CENTERModel.Store.spInsertarCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
